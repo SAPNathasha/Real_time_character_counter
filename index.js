@@ -8,10 +8,10 @@ $(document).ready(function(){
         var remain = maxLength - currentLength;
 
         $("#total-counter").text(currentLength);
-        
+        $("#total-counter").addClass("total-counter");
 
         $("#remaining-counter").text(remain);
-        
+        $("#remaining-counter").addClass("remaining-counter");
         
 });
 });
