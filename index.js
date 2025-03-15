@@ -1,17 +1,33 @@
-$(document).ready(function(){
-    var maxLength = 50;
-    var textarea = document.getElementById("textarea");
+$(document).ready(function () {
+    const maxLength = 50;
+    const $textarea = $("#textarea");
+    const $totalCounter = $("#total-counter");
+    const $remainingCounter = $("#remaining-counter");
+    const $progressBar = $(".progress");
+
     
-     
-     $("textarea").on("input", function(){
-        var currentLength = $(this).val().length;
-        var remain = maxLength - currentLength;
+    $totalCounter.text(0);
+    $remainingCounter.text(maxLength);
 
-        $("#total-counter").text(currentLength);
-        $("#total-counter").addClass("total-counter");
+    $textarea.on("input", function () {
+        const currentLength = this.value.length;
+        const remain = maxLength - currentLength;
+        const percentage = (currentLength / maxLength) * 100;
 
-        $("#remaining-counter").text(remain);
-        $("#remaining-counter").addClass("remaining-counter");
+        $totalCounter.text(currentLength);
+        $remainingCounter.text(remain);
+        $progressBar.css("width", percentage + "%");
+
         
-});
+        if (remain <= 10 && remain > 5) {
+            $progressBar.css("background-color", "orange");
+            $remainingCounter.css("color", "orange");
+        } else if (remain <= 5) {
+            $progressBar.css("background-color", "red");
+            $remainingCounter.css("color", "red");
+        } else {
+            $progressBar.css("background-color", "#76eaff");
+            $remainingCounter.css("color", "#76eaff");
+        }
+    });
 });
